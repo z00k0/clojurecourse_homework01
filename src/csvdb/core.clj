@@ -112,31 +112,6 @@
         :let [id' (get row column1)
               data (conj  (first (filter #(= (column2 %) id') data2)) row)]]
     data))
-student-subject
-student
-subject
-(for [row student-subject
-      :let [id' (get row :student_id)
-            data (conj row (first (filter #(= (:id %) id') (map #(dissoc % :id) student))))]]
-  data)
-;; (first (filter #(= (:id %) 1) student))
-;; (get  {:student_id 1, :subject_id 1} :student_id)
-(merge {:x 1} {:x 2})
-
-(join* student-subject :student_id student :id)
-;; (join* (join* student-subject :student_id student :id) :subject_id subject :id)
-(= [{:student_id 1, :subject_id 1, :id 1, :surname "Ivanov", :year 1998, :subject "Math"}
-    {:student_id 2, :subject_id 1, :id 1, :surname "Petrov", :year 1997, :subject "Math"}
-    {:student_id 2, :subject_id 2, :id 2, :surname "Petrov", :year 1997, :subject "CS"}
-    {:student_id 3, :subject_id 2, :id 2, :surname "Sidorov", :year 1996, :subject "CS"}]
-   [{:subject "Math", :subject_id 1, :surname "Ivanov", :year 1998, :student_id 1, :id 1}
-    {:subject "Math", :subject_id 1, :surname "Petrov", :year 1997, :student_id 2, :id 2}
-    {:subject "CS", :subject_id 2, :surname "Petrov", :year 1997, :student_id 2, :id 2}
-    {:subject "CS", :subject_id 2, :surname "Sidorov", :year 1996, :student_id 3, :id 3}])
-(= {:student_id 1, :subject_id 1, :id 1, :surname "Ivanov", :year 1998, :subject "Math"}
-   {:subject "Math", :subject_id 1, :surname "Ivanov", :year 1998, :student_id 1, :id 1})
-(= {:student_id 2, :subject_id 1, :id 1, :surname "Petrov", :year 1997, :subject "Math"}
-   {:subject "Math", :subject_id 1, :surname "Petrov", :year 1997, :student_id 2, :id 2})
 
 
 ;; (perform-joins student-subject [[:student_id student :id] [:subject_id subject :id]])
